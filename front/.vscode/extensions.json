@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "coenraads.bracket-pair-colorizer-2",
+    "esbenp.prettier-vscode",
+    "syler.sass-indented",
+    "glen-84.sass-lint",
+    "mutantdino.resourcemonitor"
+  ]
+}

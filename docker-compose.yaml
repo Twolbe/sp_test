@@ -1,0 +1,63 @@
+version: "3"
+
+volumes:
+  postgre_data:
+
+networks:
+  postgre_network:
+    driver: bridge
+  nginx_network:
+    driver: bridge
+
+services:
+  api:
+    build:
+      context: api
+      dockerfile: ./docker/dev/Dockerfile
+    volumes:
+      - ./api:/api
+    env_file:
+      - ./.env.dev
+    restart: always
+    networks:
+      - postgre_network
+      - nginx_network
+    depends_on:
+      - db
+  front:
+    build:
+      context: front
+      dockerfile: ./docker/dev/Dockerfile
+    env_file:
+      - ./.env.dev
+    networks:
+      - nginx_network
+    volumes:
+      - ./front/.vscode:/front/.vscode
+      - ./front/public:/front/public
+      - ./front/src:/front/src
+      - ./front/docker:/front/docker
+      - ./front/package.json:/front/package.json
+      - ./front/yarn.lock:/front/yarn.lock
+    stdin_open: true
+    tty: true
+  db:
+    image: postgres:11.4-alpine
+    restart: always
+    volumes:
+      - postgre_data:/var/lib/postgresql/data
+    env_file:
+      - ./.env.dev
+    networks:
+      - postgre_network
+  nginx:
+    image: nginx:1.17.2-alpine
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 80:80
+    networks:
+      - nginx_network
+    depends_on:
+      - api
+      - front
