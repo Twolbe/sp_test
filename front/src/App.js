@@ -1,22 +1,21 @@
-import React from "react";
-import "./App.scss";
-import { Route, Switch, BrowserRouter } from "react-router-dom";
-import Cart from "./pages/Cart";
-import Navbar from "./Navbar/Navbar";
-import Catalog from "./pages/Catalog";
+import React from 'react';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Views from './views';
+import { Route, Switch } from 'react-router-dom';
 
 function App() {
-
   return (
-    <BrowserRouter>
-      <Navbar />
-      <div className="container">
-        <Switch>
-          <Route component={Catalog} path="/" exact />
-          <Route component={Cart} path="/cart" />
-        </Switch>
-      </div>
-    </BrowserRouter>
+    <div className="App">
+      <Provider store={store}>
+        <Router>
+          <Switch>
+            <Route path="/" component={Views}/>
+          </Switch>
+        </Router>
+      </Provider>
+    </div>
   );
 }
 
