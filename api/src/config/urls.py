@@ -13,12 +13,13 @@ schema_view = get_schema_view(
         contact=openapi.Contact(email="contact@snippets.local"),
         license=openapi.License(name="BSD License"),
     ),
+    url="http://localhost:3001",
     public=False,
     permission_classes=(permissions.AllowAny,),
 )
 
 urlpatterns = [
-    path("api/endpoints/", include("request.urls")),
+    path("api/", include("banner.urls")),
     re_path(
         r"^api/swagger(?P<format>\.json|\.yaml)$",
         schema_view.without_ui(cache_timeout=0),
