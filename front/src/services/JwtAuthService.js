@@ -1,27 +1,27 @@
-import fetch from 'auth/FetchInterceptor'
+import fetch from 'auth/FetchInterceptor';
 
-const JwtAuthService = {}
+const JwtAuthService = {};
 
 JwtAuthService.login = function (data) {
-	return fetch({
-		url: '/posts',
-		method: 'post',
-		headers: {
-      'public-request': 'true'
+  return fetch({
+    url: `${process.env.REACT_APP_PROTOCOL}${process.env.REACT_APP_HOST}user/login`,
+    method: 'post',
+    headers: {
+      'public-request': 'true',
     },
-		data: data
-	})
-}
+    data: data,
+  });
+};
 
 JwtAuthService.signUp = function (data) {
-	return fetch({
-		url: '/posts',
-		method: 'post',
-		headers: {
-      'public-request': 'true'
+  return fetch({
+    url: '/posts',
+    method: 'post',
+    headers: {
+      'public-request': 'true',
     },
-		data: data
-	})
-}
+    data: data,
+  });
+};
 
-export default JwtAuthService
+export default JwtAuthService;

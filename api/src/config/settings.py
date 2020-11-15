@@ -32,6 +32,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "drf_yasg",
     "rest_framework",
+    "rest_framework.authtoken",
+    "djoser",
+    "user",
     "request",
 ]
 
@@ -76,7 +79,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-
+AUTH_USER_MODEL = "user.User"
 # Database
 
 DATABASES = {

@@ -7,7 +7,7 @@ from .serializer import RequestSerializer
 from .models import Request
 
 
-class RequestViewSet(viewsets.ModelViewSet,):
+class RequestViewSet(viewsets.ModelViewSet):
     serializer_class = RequestSerializer
 
     def get_queryset(self):

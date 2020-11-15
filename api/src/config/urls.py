@@ -3,11 +3,11 @@ from django.urls import include, path, re_path
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
-
+from djoser import views as djoser_views
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Experts Club API",
+        title="SP TEST API",
         default_version="v1",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="contact@snippets.local"),
@@ -30,4 +30,9 @@ urlpatterns = [
         name="schema-swagger-ui",
     ),
     path("api/admin/", admin.site.urls),
+    path(
+        "api/endpoints/user/login",
+        djoser_views.TokenCreateView.as_view(),
+        name="login",
+    ),
 ]
