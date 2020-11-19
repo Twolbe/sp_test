@@ -7,14 +7,15 @@ RUN apt-get update && apt-get install -y gettext
 RUN pip install --upgrade pip
 
 COPY ./docker/base/requirements.txt ./requirements/base_requirements.txt
-COPY ./docker/dev/requirements.txt ./requirements/requirements.txt
+COPY ./docker/prod/requirements.txt ./requirements/requirements.txt
 
 RUN pip install -r requirements/requirements.txt
 
-RUN rm -rf ./requirements
-
-COPY ./.vscode ./.vscode
 COPY ./src ./src
-COPY ./tasks.py ./tasks.py
 
-CMD ["sleep", "infinity"]
+RUN  rm -rf ./src/config/
+
+COPY ./docker/prod/platform_user/config ./src/config
+COPY ./start_server.sh ./start_server.sh
+
+CMD ["/bin/bash", "./start_server.sh"]

@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "djoser",
     "user",
-    # "staffuser",
     "request",
 ]
 
@@ -81,8 +80,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 AUTH_USER_MODEL = "user.User"
-# AUTH_USER_MODEL = "staffuser.StaffUser"
-
 # Database
 
 DATABASES = {
@@ -124,5 +121,5 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 
-STATIC_URL = "/api/static/"
+STATIC_URL = "/api/su/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")

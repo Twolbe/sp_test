@@ -10,10 +10,22 @@ networks:
     driver: bridge
 
 services:
-  api:
+  api_staffuser:
     build: 
       context: api
-      dockerfile: ./docker/prod/Dockerfile
+      dockerfile: ./docker/prod/staff_user/Dockerfile
+    env_file:
+      - ./.env.prod
+    restart: always
+    networks:
+      - postgre_network
+      - nginx_network
+    depends_on:
+      - db
+  api_platformuser:
+    build: 
+      context: api
+      dockerfile: ./docker/prod/platform_user/Dockerfile
     env_file:
       - ./.env.prod
     restart: always
@@ -42,11 +54,12 @@ services:
   nginx:
     image: nginx:1.17.2-alpine
     volumes:
-      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./default.prod.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 80:80
     networks:
       - nginx_network
     depends_on:
-      - api
+      - api_platformuser
+      - api_staffuser
       - front

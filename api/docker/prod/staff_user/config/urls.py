@@ -18,20 +18,20 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path("api/endpoints/", include("request.urls")),
+    path("api/su/endpoints/", include("request.urls")),
     re_path(
-        r"^api/pu/swagger(?P<format>\.json|\.yaml)$",
+        r"^api/su/swagger(?P<format>\.json|\.yaml)$",
         schema_view.without_ui(cache_timeout=0),
         name="schema-json",
     ),
     path(
-        "api/swagger/",
+        "api/su/swagger/",
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
-    path("api/admin/", admin.site.urls),
+    path("api/su/admin/", admin.site.urls),
     path(
-        "api/endpoints/user/login",
+        "api/su/endpoints/user/login",
         djoser_views.TokenCreateView.as_view(),
         name="login",
     ),

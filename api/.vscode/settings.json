@@ -12,6 +12,5 @@
       "when": "$(basename).py"
     },
     "**/__pycache__": true
-  },
-  "python.pythonPath": "/usr/local/bin/python"
+  }
 }
