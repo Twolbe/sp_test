@@ -6,7 +6,7 @@ set -o nounset
 
 cd ./src/
 
-export DJANGO_SETTINGS_MODULE=config.settings
+export DJANGO_SETTINGS_MODULE=config.settings.prod
 
 python manage.py migrate --noinput
 

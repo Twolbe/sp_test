@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:11.4-alpine
+    restart: always
+    volumes:
+      - postgre_data:/var/lib/postgresql/data
+    env_file:
+      - ../../.env.dev
+    networks:
+      - postgre_network

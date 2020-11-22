@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  front:
+    build:
+      context: ../../front
+      dockerfile: ./docker/dev/Dockerfile
+    env_file:
+      - ../../.env.dev
+    networks:
+      - nginx_network
+    volumes:
+      - ../../front/.vscode:/front/.vscode
+      - ../../front/public:/front/public
+      - ../../front/src:/front/src
+      - ../../front/docker:/front/docker
+      - ../../front/package.json:/front/package.json
+      - ../../front/yarn.lock:/front/yarn.lock
+    stdin_open: true
+    tty: true

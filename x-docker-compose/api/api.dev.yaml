@@ -1,0 +1,27 @@
+version: "3"
+
+x-api-dev: &base-api-dev
+  build:
+    context: ../../api
+    dockerfile: ./docker/dev/Dockerfile
+  volumes:
+    - ../../api/.vscode:/api/.vscode
+    - ../../api/src:/api/src
+    - ../../api/tasks.py:/api/tasks.py
+  restart: always
+  networks:
+    - postgre_network
+    - nginx_network
+  env_file:
+    - ../../.env.dev
+
+services:
+  api-staffuser:
+    <<: *base-api-dev
+    environment: 
+    - USER_TYPE=su
+
+  api-platformuser:
+    <<: *base-api-dev
+    environment: 
+    - USER_TYPE=pu

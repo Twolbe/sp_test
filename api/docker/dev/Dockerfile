@@ -13,8 +13,6 @@ RUN pip install -r requirements/requirements.txt
 
 RUN rm -rf ./requirements
 
-COPY ./.vscode ./.vscode
-COPY ./src ./src
-COPY ./tasks.py ./tasks.py
+COPY . .
 
 CMD ["sleep", "infinity"]

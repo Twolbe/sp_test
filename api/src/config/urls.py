@@ -4,6 +4,7 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 from djoser import views as djoser_views
+from django.conf import settings
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -18,20 +19,20 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path("api/endpoints/", include("request.urls")),
+    path(f"api/{settings.USER_TYPE}/endpoints/", include("request.urls")),
     re_path(
-        r"^api/pu/swagger(?P<format>\.json|\.yaml)$",
+        r"^api/" + settings.USER_TYPE + r"/swagger(?P<format>\.json|\.yaml)$",
         schema_view.without_ui(cache_timeout=0),
         name="schema-json",
     ),
     path(
-        "api/swagger/",
+        f"api/{settings.USER_TYPE}/swagger/",
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
-    path("api/admin/", admin.site.urls),
+    path(f"api/{settings.USER_TYPE}/admin/", admin.site.urls),
     path(
-        "api/endpoints/user/login",
+        f"api/{settings.USER_TYPE}/endpoints/user/login",
         djoser_views.TokenCreateView.as_view(),
         name="login",
     ),

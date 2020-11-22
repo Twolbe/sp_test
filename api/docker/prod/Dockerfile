@@ -10,12 +10,8 @@ COPY ./docker/base/requirements.txt ./requirements/base_requirements.txt
 COPY ./docker/prod/requirements.txt ./requirements/requirements.txt
 
 RUN pip install -r requirements/requirements.txt
+RUN rm -rf ./requirements
 
-COPY ./src ./src
-
-RUN  rm -rf ./src/config/
-
-COPY ./docker/prod/platform_user/config ./src/config
-COPY ./start_server.sh ./start_server.sh
+COPY . .
 
 CMD ["/bin/bash", "./start_server.sh"]
