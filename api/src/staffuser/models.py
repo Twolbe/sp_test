@@ -22,7 +22,7 @@ class CustomUserManager(UserManager):
         return self._create_user(email, password, **extra_fields)
 
 
-class User(AbstractUser):
+class StaffUser(AbstractUser):
     username = None
     email = models.EmailField(unique=True, verbose_name="email")
     phone = models.CharField(

@@ -11,7 +11,7 @@ networks:
 
 services:
   api-staffuser:
-    container_name: api-staffuser-${API_SU_MODE}
+    # container_name: api-staffuser-${API_SU_MODE}
     extends:
       file: ./x-docker-compose/api/${API_SU_MODE}.yaml
       service: api-staffuser
@@ -19,7 +19,7 @@ services:
       - db
 
   api-platformuser:
-    container_name: api-platformuser-${API_PU_MODE}
+    # container_name: api-platformuser-${API_PU_MODE}
     extends:
       file: ./x-docker-compose/api/${API_PU_MODE}.yaml
       service: api-platformuser

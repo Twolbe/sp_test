@@ -43,6 +43,7 @@ def up(ctx, d):
     if "api_pu" in d:
         os.environ["API_PU_MODE"] = "dev"
     ctx.run(f'docker-compose -f "docker-compose.yaml" up -d --build')
+    ctx.run("echo -en '\033[0;31mapi_su: \033[0;32m'${API_SU_MODE} '\033[0;31mapi_pu: \033[0;32m'${API_PU_MODE} '\033[0;31mfront: \033[0;32m'${FRONT_MODE}'\n'")
 
 
 @task

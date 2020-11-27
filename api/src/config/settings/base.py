@@ -9,6 +9,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 USER_TYPE = os.environ.get("USER_TYPE")
 
+print(USER_TYPE)
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -34,9 +36,9 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "djoser",
-    "user",
-    # "staffuser",
+    "platformuser",
     "request",
+    "staffuser",
 ]
 
 MIDDLEWARE = [
@@ -77,8 +79,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-AUTH_USER_MODEL = "user.User"
-# AUTH_USER_MODEL = "staffuser.StaffUser"
+if USER_TYPE == "su":
+    AUTH_USER_MODEL = "staffuser.StaffUser"
+elif USER_TYPE == "pu":
+    AUTH_USER_MODEL = "platformuser.PlatformUser"
 
 # Database
 
